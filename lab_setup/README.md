@@ -42,24 +42,34 @@ Note:  It is highly important that you unzip the file correctly to this location
     - LabSampleCode
 
 3.  **Install** the Ubuntu Linux tools:
-```
-bash$ sudo apt-get install build-essential uuid-dev iasl git 
-bash$ sudo apt-get install gcc-5 nasm 
-bash$ sudo apt-get install qemu
+```shell
+sudo apt-get install build-essential uuid-dev iasl git 
+sudo apt-get install gcc-5 nasm 
+sudo apt-get install qemu
 ```
 4. ** Create **a directory “src”<br>
-   `bash$ mkdir ~src` <br>
+```shell
+mkdir ~src`
+```
 5. From the `~.../FW` folder, copy and paste folder “`~.../FW/edk2`” to `~src`
 6. **Rename** or **mv** the directory “`~src/edk2/BaseTools`” to something else <br>
-  `bash$ cd ~src/edk2` <br>
-  `bash$ mv BaseTools BaseToolsX`<br>
+```shell
+cd ~src/edk2`
+mv BaseTools BaseToolsX`
+```
 7. **Extract** the file `~FW/edk2Linux/BaseTools.tar.gz`  to  `~src/edk2`<br>
-  `bash$ cd ~src/edk2` <br>
+```shell
+cd ~src/edk2
+```
 8. Make the BaseTools and setup the environment <br>
-   `bash$ make –C BaseTools` <br>
-   `bash$ . edksetup.sh` <br>
+```shell
+make –C BaseTools
+. edksetup.sh
+```
 9. **Open **the file Conf/target.txt<br>
-   `bash$ gedit Conf/target.txt`
+```shell
+gedit Conf/target.txt
+```
 10. Update the following:
 
 ```
@@ -89,25 +99,33 @@ For build errors the Build option for GCC5 may need to be updated:
 
 1. **Create** a run-ovmf directory under the home directory
 ```
-   bash$ cd ~
-   bash$ mkdir ~run-ovmf
-   bash$ cd run-ovmf
+cd ~
+mkdir ~run-ovmf
+cd run-ovmf
 ```
 2. **Create** a directory hda-contents to use as a hard disk image <br>
-   `bash$ mkdir hda-contents` <br>
+ ```shell
+ mkdir hda-contents
+```
 3. **Copy** the `OVMF.fd` BIOS image created from the `build` to the run-ovmf directory naming it `bios.bin` <br>
-   `bash$ cp ~/src/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd bios.bin` <br>
+```shell
+cp ~/src/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd bios.bin
+```
 4. Create a Linux shell script to run the QEMU from the run-ovmf directory <br>
-   `bash$ gedit RunQemu.sh` <br>
+```shell
+gedit RunQemu.sh
+```
  Add the following:  <br>
 
-```
+```shell
 qemu-system-x86_64 -pflash bios.bin -hda fat:rw:hda-contents -net none -debugcon file:debug.log -global isa-debugcon.iobase=0x402
 ```
 ![](/media/geditRunQemush.png)
 5. **Save** RunQemu.sh and exit
 6. **Run** the RunQemu.sh Linux Shell Script: <br>
- `bash$ . RunQemu.sh`<br>
+```shell
+. RunQemu.sh
+```
 ![](/media/QEMU_BootingOVMF.JPG)
 
 
